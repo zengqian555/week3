@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>向量类型</title>
+</head>
+<body>
+    <script>
+function Vec(x, y) {
+    this.x = x;
+    this.y = y;
+}
+Vec.prototype.plus = function (otherVec) {
+    return new Vec(this.x + otherVec.x, this.y + otherVec.y);
+};
+Vec.prototype.minus = function (otherVec) {
+    return new Vec(this.x - otherVec.x, this.y - otherVec.y);
+};
+Object.defineProperty(Vec.prototype, 'length', {
+    get: function () {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
+});
+console.log(new Vec(1, 2).plus(new Vec(2, 3))); 
+console.log(new Vec(1, 2).minus(new Vec(2, 3))); 
+console.log(new Vec(3, 4).length); 
+    </script>
+</body>
+</html>

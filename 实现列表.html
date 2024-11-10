@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现列表</title>
+</head>
+<body>
+    <script>
+function arrayToList(arr) {
+    if (arr.length === 0) {
+        return null;
+    }
+    let restList = arrayToList(arr.slice(1));
+    return { value: arr[0], rest: restList };
+}
+function listToArray(list) {
+    if (list === null) {
+        return [];
+    }
+    return [list.value].concat(listToArray(list.rest));
+}
+function prepend(value, list) {
+    return { value, rest: list };
+}
+function nth(list, index) {
+    if (index < 0 || list === null) {
+        return undefined;
+    }
+    if (index === 0) {
+        return list.value;
+    }
+    return nth(list.rest, index - 1);
+}
+console.log(arrayToList([10, 20]));  
+console.log(listToArray(arrayToList([10, 20, 30]))); 
+console.log(prepend(10, prepend(20, null))); 
+console.log(nth(arrayToList([10, 20, 30]), 1)); 
+    </script>
+</body>
+</html>

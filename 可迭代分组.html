@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可迭代分组</title>
+</head>
+<body>
+    <script>
+        class Group {
+    constructor() {
+        this.items = new Set(); 
+    }
+
+    add(value) {
+        this.items.add(value);
+    }
+
+    delete(value) {
+        this.items.delete(value);
+    }
+
+    has(value) {
+        return this.items.has(value);
+    }
+
+    [Symbol.iterator]() {
+        return this.items[Symbol.iterator]();
+    }
+
+    static from(iterable) {
+        const group = new Group();
+        for (let value of iterable) {
+            group.add(value);
+        }
+        return group;
+    }
+}
+
+
+let group = Group.from(["a", "b", "c"]);
+for (let value of group) {
+    console.log(value);
+}
+    </script>
+</body>
+</html>

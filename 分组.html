@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分组</title>
+</head>
+<body>
+    <script>
+       class Group {
+    constructor() {
+        this.items = [];
+    }
+    add(value) {
+        if (!this.has(value)) {
+            this.items.push(value);
+        }
+    }
+    delete(value) {
+        const index = this.items.indexOf(value);
+        if (index > -1) {
+            this.items.splice(index, 1);
+        }
+    }
+    has(value) {
+        return this.items.indexOf(value) > -1;
+    }
+    static from(iterable) {
+        const group = new Group();
+        for (let value of iterable) {
+            group.add(value);
+        }
+        return group;
+    }
+}
+let group = Group.from([10, 20]);
+console.log(group.has(10));
+console.log(group.has(30)); 
+group.add(10); 
+group.delete(10);
+console.log(group.has(10));
+    </script>
+</body>
+</html>
